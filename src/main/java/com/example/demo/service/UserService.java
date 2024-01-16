@@ -38,8 +38,8 @@ public class UserService {
     }
 
     //login
-    public Optional<User> loginUser(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password);
+    public Optional<User> loginUser(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
     }
 
     //find a user by their email, ignoring case sensitivity.

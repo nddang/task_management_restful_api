@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM users WHERE LOWER(email) = LOWER(:email)", nativeQuery = true)
     Optional<User> findByEmailIgnoreCase(@Param("email") String email);
 
-    Optional<User> findByUsernameAndPassword(String username, String password);
+    Optional<User> findByEmailAndPassword(String email, String password);
 
     User findByUsername(String username);
 }

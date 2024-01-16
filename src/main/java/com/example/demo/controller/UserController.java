@@ -15,12 +15,18 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
+
 public class UserController {
 
-    private UserService userService;
-    private UserRepository userRepository;
-    private TaskRepository taskRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
+    private final TaskRepository taskRepository;
 
+    public UserController(UserService userService, UserRepository userRepository, TaskRepository taskRepository) {
+        this.userService = userService;
+        this.userRepository = userRepository;
+        this.taskRepository = taskRepository;
+    }
     
     //user login
     @PostMapping("/login")

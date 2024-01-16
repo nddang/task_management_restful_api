@@ -4,6 +4,7 @@ import com.example.demo.model.Task;
 import com.example.demo.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ public class TaskService {
 
     //created task
     public Task createTask(Task task) {
+    	task.setTime(LocalDateTime.now());
         return taskRepository.save(task);
     }
 
