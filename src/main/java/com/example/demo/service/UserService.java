@@ -42,8 +42,8 @@ public class UserService {
         return userRepository.findByEmailAndPassword(email, password);
     }
 
-    //find a user by their email, ignoring case sensitivity.
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmailIgnoreCase(email);
+    //find a user by their email
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

@@ -27,18 +27,6 @@ public class UserController {
         this.userRepository = userRepository;
         this.taskRepository = taskRepository;
     }
-    
-    //user login
-    @PostMapping("/login")
-    public ResponseEntity<Optional<User>> login(@RequestParam("email") String email,
-                                        @RequestParam("password") String password) {
-    	Optional<User> user = userService.loginUser(email, password);
-    	if (user.isPresent()) {
-    		return ResponseEntity.ok(user);
-    	}else {
-    		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    	}
-    }
 
     //get all users
     @GetMapping("/")
@@ -72,13 +60,6 @@ public class UserController {
         }
     }
 
-    //register a new user
-    @PostMapping("/")
-    public ResponseEntity<User> registerUser(@Valid @RequestBody User user) {
-        User createdUser = userService.registerUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
-    }
-
     //create a new task for user
     @PostMapping("/{userId}/tasks")
     public ResponseEntity<Task> createTask(@PathVariable Long userId, @RequestBody Task task) {
@@ -103,9 +84,8 @@ public class UserController {
     //get user ID by email
     @GetMapping("/email/{email:.+}")
     public ResponseEntity<Long> getUserIdByEmail(@PathVariable("email") String email) {
-        Optional<User> optionalUser = userService.findByEmail(email);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
+        User user = userService.findByEmail(email);
+        if (user!=null) {
             return ResponseEntity.ok(user.getId());
         } else {
             return ResponseEntity.notFound().build();

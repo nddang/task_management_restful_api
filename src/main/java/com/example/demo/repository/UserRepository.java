@@ -9,10 +9,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByEmail(String email);
-
-    @Query(value = "SELECT * FROM users WHERE LOWER(email) = LOWER(:email)", nativeQuery = true)
-    Optional<User> findByEmailIgnoreCase(@Param("email") String email);
+    User findByEmail(String email);
 
     Optional<User> findByEmailAndPassword(String email, String password);
 
